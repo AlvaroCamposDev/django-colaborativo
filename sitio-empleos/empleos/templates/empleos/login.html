@@ -1,0 +1,569 @@
+{% extends 'empleos/base.html' %}
+{% load static %}
+
+{% block title %}Iniciar Sesión - Portal de Empleos{% endblock %}
+
+{% block content %}
+<!-- Login Hero Section -->
+<section class="login-section">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-lg-5 col-md-7">
+                <div class="login-card">
+                    <div class="login-header text-center mb-4">
+                        <div class="brand-logo-large">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h2 class="login-title">Bienvenido de vuelta</h2>
+                        <p class="login-subtitle text-muted">Inicia sesión para acceder a tu cuenta</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form method="POST" class="login-form">
+                        {% csrf_token %}
+                        
+                        <!-- Username Field -->
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label">Usuario o Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="username" 
+                                       name="username" 
+                                       placeholder="Ingresa tu usuario o email"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" 
+                                       class="form-control" 
+                                       id="password" 
+                                       name="password" 
+                                       placeholder="Ingresa tu contraseña"
+                                       required>
+                                <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="form-options mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">
+                                    Recordarme
+                                </label>
+                            </div>
+                            <a href="#" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" class="btn btn-login w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            Iniciar Sesión
+                        </button>
+
+                        <!-- Divider -->
+                        <div class="divider mb-3">
+                            <span>o continúa con</span>
+                        </div>
+
+                        <!-- Social Login Buttons -->
+                        <div class="social-login mb-4">
+                            <button type="button" class="btn btn-social btn-google">
+                                <i class="fab fa-google me-2"></i>
+                                Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-linkedin">
+                                <i class="fab fa-linkedin-in me-2"></i>
+                                LinkedIn
+                            </button>
+                        </div>
+
+                        <!-- Register Link -->
+                        <div class="register-link text-center">
+                            <p class="mb-0">¿No tienes una cuenta? 
+                                <a href="#" class="register-link-text">Regístrate aquí</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side - Benefits -->
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="login-benefits">
+                    <div class="benefits-content">
+                        <h3 class="benefits-title">Únete a miles de profesionales</h3>
+                        <p class="benefits-subtitle">Descubre oportunidades laborales que se adapten a tu perfil</p>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h5>Búsqueda Inteligente</h5>
+                                <p>Encuentra empleos que coincidan exactamente con tus habilidades y experiencia</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h5>Alertas Personalizadas</h5>
+                                <p>Recibe notificaciones sobre nuevas oportunidades laborales de tu interés</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h5>Seguimiento de Aplicaciones</h5>
+                                <p>Mantén control de todas tus postulaciones en un solo lugar</p>
+                            </div>
+                        </div>
+
+                        <div class="stats">
+                            <div class="stat-item">
+                                <h4>50K+</h4>
+                                <p>Empleos Activos</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>15K+</h4>
+                                <p>Empresas</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>100K+</h4>
+                                <p>Profesionales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom Styles -->
+<style>
+/* Variables CSS */
+:root {
+    --primary-blue: #007bff;
+    --primary-blue-dark: #0056b3;
+    --text-dark: #2c3e50;
+    --text-muted: #6c757d;
+    --bg-light: #f8f9fa;
+    --border-color: #e9ecef;
+    --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Login Section */
+.login-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: calc(100vh - 80px);
+    padding: 2rem 0;
+}
+
+/* Login Card */
+.login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.login-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px);
+}
+
+/* Login Header */
+.brand-logo-large {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-bg);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+}
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Form Styles */
+.login-form {
+    margin-top: 2rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group-text {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-right: none;
+    color: var(--text-muted);
+}
+
+.form-control {
+    border: 1px solid var(--border-color);
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.forgot-password-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.forgot-password-link:hover {
+    color: var(--primary-blue-dark);
+    text-decoration: underline;
+}
+
+/* Login Button */
+.btn-login {
+    background: var(--gradient-bg);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    color: white;
+}
+
+/* Divider */
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Social Login */
+.social-login {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-social {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-google {
+    color: #db4437;
+    background: white;
+}
+
+.btn-google:hover {
+    background: #db4437;
+    color: white;
+    border-color: #db4437;
+}
+
+.btn-linkedin {
+    color: #0077b5;
+    background: white;
+}
+
+.btn-linkedin:hover {
+    background: #0077b5;
+    color: white;
+    border-color: #0077b5;
+}
+
+/* Register Link */
+.register-link-text {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link-text:hover {
+    color: var(--primary-blue-dark);
+    text-decoration: underline;
+}
+
+/* Benefits Section */
+.login-benefits {
+    padding: 3rem 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.benefits-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.benefits-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.benefit-text h5 {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.benefit-text p {
+    color: var(--text-muted);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    color: var(--text-muted);
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-card {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+    }
+    
+    .login-title {
+        font-size: 1.75rem;
+    }
+    
+    .brand-logo-large {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .social-login {
+        flex-direction: column;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+/* Toggle Password Button */
+#togglePassword {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Loading State */
+.btn-login.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-login.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 0.5rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+<!-- Custom JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle Password Visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+    
+    // Form Validation
+    const loginForm = document.querySelector('.login-form');
+    const loginButton = document.querySelector('.btn-login');
+    
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!username || !password) {
+                e.preventDefault();
+                alert('Por favor, completa todos los campos');
+                return;
+            }
+            
+            // Add loading state
+            loginButton.classList.add('loading');
+            loginButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Iniciando sesión...';
+        });
+    }
+    
+    // Social Login Handlers
+    document.querySelector('.btn-google')?.addEventListener('click', function() {
+        console.log('Google login clicked');
+        // Implementar login con Google
+    });
+    
+    document.querySelector('.btn-linkedin')?.addEventListener('click', function() {
+        console.log('LinkedIn login clicked');
+        // Implementar login con LinkedIn
+    });
+});
+</script>
+{% endblock %}

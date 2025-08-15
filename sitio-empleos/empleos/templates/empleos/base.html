@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portal de Empleos{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           NAVBAR STYLES - ORGANIZADOS POR SECCIONES
+           ============================================ */
+
+        /* === 1. VARIABLES Y COLORES === */
+        :root {
+            --primary-blue: #007bff;
+            --primary-blue-dark: #0056b3;
+            --text-dark: #2c3e50;
+            --bg-light: rgba(248, 249, 250, 0.8);
+            --bg-white: rgba(255, 255, 255, 0.95);
+            --bg-white-solid: rgba(255, 255, 255, 0.98);
+            --hover-blue: rgba(0, 123, 255, 0.1);
+            --hover-blue-strong: rgba(0, 123, 255, 0.15);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 2px 20px rgba(0, 0, 0, 0.1);
+            --shadow-dropdown: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --notification-red: #dc3545;
+            --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* === 2. NAVBAR PRINCIPAL === */
+        .navbar-custom {
+            background: var(--bg-white);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .navbar-scrolled {
+            background: var(--bg-white-solid);
+            box-shadow: var(--shadow-light);
+            padding: 0.5rem 0;
+        }
+        
+        /* === 3. BRAND/LOGO === */
+        .navbar-brand-custom {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+            margin-right: auto;
+            padding-left: 0;  /* Sin padding izquierdo */
+        }
+        
+        .navbar-brand-custom:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .navbar-brand-custom i {
+            margin-right: 0.5rem;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+        
+        /* === 4. NAVIGATION LINKS === */
+        .navbar-nav-custom {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav-custom .nav-item {
+            margin: 0 0.25rem;
+        }
+
+        .navbar-nav-custom .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.75rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-nav-custom .nav-link:hover {
+            color: var(--primary-blue) !important;
+            background: var(--hover-blue);
+        }
+        
+        .navbar-nav-custom .nav-link.active {
+            color: var(--primary-blue) !important;
+            background: var(--hover-blue-strong);
+        }
+
+        .navbar-nav-custom .nav-link i {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* === 5. DROPDOWN MENUS === */
+        .dropdown-menu-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dropdown);
+            padding: 1rem 0;
+            margin-top: 0.5rem;
+            background: white;
+        }
+        
+        .dropdown-item-custom {
+            padding: 0.75rem 1.5rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .dropdown-item-custom:hover {
+            background: var(--hover-blue);
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .dropdown-item-custom i {
+            margin-right: 0.75rem;
+            width: 16px;
+            text-align: center;
+        }
+        
+        /* === 6. SEARCH BAR === */
+        .navbar-search {
+            position: relative;
+            margin: 0 1rem;
+        }
+        
+        .navbar-search input {
+            background: var(--bg-light);
+            border: 1px solid #e9ecef;
+            border-radius: 25px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            width: 250px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .navbar-search input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            background: white;
+        }
+        
+        .navbar-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* === 7. ACTION BUTTONS === */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: auto;  /* Empuja los botones a la derecha */
+            padding-right: 0;   /* Sin padding derecho para evitar cortes */
+            flex-shrink: 0;     /* Evita que se compriman */
+        }
+
+        .btn-navbar-secondary {
+            background: transparent;
+            color: var(--primary-blue) !important;
+            border: 2px solid var(--primary-blue);
+            border-radius: 25px;
+            padding: 0.6rem 1.25rem;  /* Padding más ajustado */
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;  /* Texto ligeramente más pequeño */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            min-width: 120px;  /* Ancho mínimo para evitar compresión */
+        }
+        
+        .btn-navbar-secondary:hover {
+            background: var(--primary-blue);
+            color: white !important;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .btn-navbar-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white !important;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 1.5rem;   /* Padding más ajustado */
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;   /* Texto ligeramente más pequeño */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            min-width: 140px;  /* Ancho mínimo para evitar compresión */
+        }
+        
+        .btn-navbar-primary:hover {
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+            color: white !important;
+            text-decoration: none;
+        }
+        
+        /* === 8. NOTIFICATIONS AND USER === */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--notification-red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gradient-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* === 9. MOBILE RESPONSIVE === */
+        /* === 9. MOBILE RESPONSIVE === */
+        @media (max-width: 1200px) {
+            /* Ajustar botones en pantallas medianas */
+            .btn-navbar-secondary {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            
+            .btn-navbar-primary {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            /* Ocultar elementos en mobile */
+            .navbar-search {
+                display: none;
+            }
+            
+            .navbar-nav-custom,
+            .navbar-actions {
+                display: none;
+            }
+            
+            /* Mostrar elementos mobile en collapse */
+            .navbar-collapse .navbar-search {
+                display: block;
+                margin: 1rem 0;
+                width: 100%;
+            }
+            
+            .navbar-collapse .navbar-search input {
+                width: 100%;
+            }
+            
+            .navbar-collapse .btn-navbar-primary,
+            .navbar-collapse .btn-navbar-secondary {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .navbar-collapse .navbar-nav-custom {
+                display: block;
+                text-align: center;
+                margin: 1rem 0;
+            }
+
+            .navbar-collapse .navbar-actions {
+                display: flex;
+                flex-direction: column;
+                margin-top: 1rem;
+                padding-right: 0;
+            }
+            
+            .navbar-brand-custom {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-custom {
+                padding: 0.75rem 0;
+            }
+
+            .navbar-brand-custom {
+                font-size: 1.3rem;
+            }
+
+            .navbar-brand-custom i {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* === 10. NAVBAR SPACER === */
+        .navbar-spacer {
+            height: 80px;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-spacer {
+                height: 70px;
+            }
+        }
+
+        /* === 11. ADDITIONAL IMPROVEMENTS === */
+        .dropdown-divider {
+            margin: 0.5rem 0;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* Smooth hover transitions */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Focus styles for accessibility */
+        .nav-link:focus,
+        .btn-navbar-primary:focus,
+        .btn-navbar-secondary:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNavbar">
+        <div class="container-fluid px-3">
+            <!-- BRAND/LOGO -->
+            <a class="navbar-brand-custom" href="{% url 'home' %}">
+                <i class="fas fa-briefcase"></i>
+                Portal Empleos
+            </a>
+            
+            <!-- MOBILE TOGGLE -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: #2c3e50; font-size: 1.2rem;"></i>
+            </button>
+            
+            <!-- NAVBAR CONTENT -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- LEFT NAVIGATION -->
+                <ul class="navbar-nav navbar-nav-custom">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search"></i>Buscar Empleos
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" 
+                           data-bs-toggle="dropdown">
+                            <i class="fas fa-th-grid"></i>Categorías
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-custom">
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-code text-primary"></i>Programación
+                            </a></li>
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-palette text-success"></i>Diseño / UX
+                            </a></li>
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-chart-bar text-info"></i>Data Science
+                            </a></li>
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-mobile-alt text-warning"></i>Desarrollo Mobile
+                            </a></li>
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-bullhorn text-danger"></i>Marketing Digital
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                <i class="fas fa-plus"></i>Ver todas las categorías
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-building"></i>Empresas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-blog"></i>Blog
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- SEARCH BAR -->
+                <div class="navbar-search d-none d-lg-block">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" placeholder="Buscar empleos...">
+                </div>
+                
+                <!-- RIGHT NAVIGATION -->
+                <ul class="navbar-nav navbar-nav-custom">
+                    <!-- ELEMENTOS SOLO PARA USUARIOS LOGUEADOS -->
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="#" title="Notificaciones">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" title="Favoritos">
+                                <i class="fas fa-heart"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" 
+                               role="button" data-bs-toggle="dropdown">
+                                <div class="user-avatar me-2">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="d-none d-lg-inline">Mi Cuenta</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-custom dropdown-menu-end">
+                                <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                    <i class="fas fa-user"></i>Mi Perfil
+                                </a></li>
+                                <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                    <i class="fas fa-file-alt"></i>Mi CV
+                                </a></li>
+                                <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                    <i class="fas fa-paper-plane"></i>Mis Aplicaciones
+                                </a></li>
+                                <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                    <i class="fas fa-cog"></i>Configuración
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item dropdown-item-custom" href="#">
+                                    <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    
+                    <!-- BOTÓN INICIO - SIEMPRE VISIBLE -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}" title="Inicio">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- ACTION BUTTONS -->
+                <div class="navbar-actions">
+                    {% if user.is_authenticated %}
+                        <!-- USUARIO LOGUEADO - Solo mostrar Publicar Empleo -->
+                        <a href="#" class="btn-navbar-primary">
+                            <i class="fas fa-plus me-1"></i>Publicar Empleo
+                        </a>
+                    {% else %}
+                        <!-- USUARIO NO LOGUEADO - Mostrar ambos botones -->
+                        <a href="{% url 'login' %}" class="btn-navbar-secondary">
+                            <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                        </a>
+                        <a href="#" class="btn-navbar-primary">
+                            <i class="fas fa-plus me-1"></i>Publicar Empleo
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- NAVBAR SPACER -->
+    <div class="navbar-spacer"></div>
+
+    <!-- MESSAGES -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- MAIN CONTENT -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-primary mb-3">
+                        <i class="fas fa-briefcase me-2"></i>Portal Empleos
+                    </h5>
+                    <p>Conectando talento con oportunidades. Encuentra tu próximo empleo o el candidato perfecto.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Para Candidatos</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="text-light text-decoration-none">Buscar Empleos</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Crear CV</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Alertas de Empleo</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Para Empresas</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="text-light text-decoration-none">Publicar Empleo</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Buscar Candidatos</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Planes y Precios</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Soporte</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="text-light text-decoration-none">Centro de Ayuda</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Contacto</a></li>
+                                <li><a href="#" class="text-light text-decoration-none">Términos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Portal Empleos. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- CUSTOM JAVASCRIPT -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.navbar-search input');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const query = this.value.trim();
+                        if (query) {
+                            console.log('Searching for:', query);
+                            // window.location.href = `/buscar/?q=${encodeURIComponent(query)}`;
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = location.pathname;
+            const menuItems = document.querySelectorAll('.navbar-nav-custom .nav-link');
+            
+            menuItems.forEach(item => {
+                if (item.getAttribute('href') === currentLocation) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+    </script>
+    
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>     
