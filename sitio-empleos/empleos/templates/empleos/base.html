@@ -61,7 +61,7 @@
             align-items: center;
             transition: color 0.3s ease;
             margin-right: auto;
-            padding-left: 0;  /* Sin padding izquierdo */
+            padding-left: 0;
         }
         
         .navbar-brand-custom:hover {
@@ -181,9 +181,9 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            margin-left: auto;  /* Empuja los botones a la derecha */
-            padding-right: 0;   /* Sin padding derecho para evitar cortes */
-            flex-shrink: 0;     /* Evita que se compriman */
+            margin-left: auto;
+            padding-right: 0;
+            flex-shrink: 0;
         }
 
         .btn-navbar-secondary {
@@ -191,17 +191,17 @@
             color: var(--primary-blue) !important;
             border: 2px solid var(--primary-blue);
             border-radius: 25px;
-            padding: 0.6rem 1.25rem;  /* Padding más ajustado */
+            padding: 0.6rem 1.25rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 0.85rem;  /* Texto ligeramente más pequeño */
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             white-space: nowrap;
-            min-width: 120px;  /* Ancho mínimo para evitar compresión */
+            min-width: 120px;
         }
         
         .btn-navbar-secondary:hover {
@@ -216,17 +216,17 @@
             color: white !important;
             border: none;
             border-radius: 25px;
-            padding: 0.7rem 1.5rem;   /* Padding más ajustado */
+            padding: 0.7rem 1.5rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 0.85rem;   /* Texto ligeramente más pequeño */
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             white-space: nowrap;
-            min-width: 140px;  /* Ancho mínimo para evitar compresión */
+            min-width: 140px;
         }
         
         .btn-navbar-primary:hover {
@@ -268,9 +268,7 @@
         }
         
         /* === 9. MOBILE RESPONSIVE === */
-        /* === 9. MOBILE RESPONSIVE === */
         @media (max-width: 1200px) {
-            /* Ajustar botones en pantallas medianas */
             .btn-navbar-secondary {
                 padding: 0.5rem 1rem;
                 font-size: 0.8rem;
@@ -285,7 +283,6 @@
         }
 
         @media (max-width: 991px) {
-            /* Ocultar elementos en mobile */
             .navbar-search {
                 display: none;
             }
@@ -295,7 +292,6 @@
                 display: none;
             }
             
-            /* Mostrar elementos mobile en collapse */
             .navbar-collapse .navbar-search {
                 display: block;
                 margin: 1rem 0;
@@ -363,12 +359,10 @@
             border-top: 1px solid #e9ecef;
         }
 
-        /* Smooth hover transitions */
         * {
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Focus styles for accessibility */
         .nav-link:focus,
         .btn-navbar-primary:focus,
         .btn-navbar-secondary:focus {
@@ -384,7 +378,7 @@
             <!-- BRAND/LOGO -->
             <a class="navbar-brand-custom" href="{% url 'home' %}">
                 <i class="fas fa-briefcase"></i>
-                Portal Empleos
+                AlvaWorks 
             </a>
             
             <!-- MOBILE TOGGLE -->
@@ -398,7 +392,7 @@
                 <ul class="navbar-nav navbar-nav-custom">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-search"></i>Buscar Empleos
+                            <i class="fas fa-building"></i>Empresas
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -428,14 +422,15 @@
                             </a></li>
                         </ul>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-building"></i>Empresas
+                            <i class="fas fa-blog"></i>Buscador IA 
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-blog"></i>Blog
+                            <i class="fas fa-blog"></i>Salarios
                         </a>
                     </li>
                 </ul>
@@ -618,7 +613,6 @@
                         const query = this.value.trim();
                         if (query) {
                             console.log('Searching for:', query);
-                            // window.location.href = `/buscar/?q=${encodeURIComponent(query)}`;
                         }
                     }
                 });
@@ -643,4 +637,4 @@
     {% block extra_js %}
     {% endblock %}
 </body>
-</html>     
+</html>

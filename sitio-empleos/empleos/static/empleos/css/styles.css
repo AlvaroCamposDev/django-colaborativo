@@ -1,0 +1,997 @@
+ /* ============================================
+           NAVBAR STYLES - ORGANIZADOS POR SECCIONES
+           ============================================ */
+
+        /* === 1. VARIABLES Y COLORES === */
+        :root {
+            --primary-blue: #007bff;
+            --primary-blue-dark: #0056b3;
+            --text-dark: #2c3e50;
+            --bg-light: rgba(248, 249, 250, 0.8);
+            --bg-white: rgba(255, 255, 255, 0.95);
+            --bg-white-solid: rgba(255, 255, 255, 0.98);
+            --hover-blue: rgba(0, 123, 255, 0.1);
+            --hover-blue-strong: rgba(0, 123, 255, 0.15);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-light: 0 2px 20px rgba(0, 0, 0, 0.1);
+            --shadow-dropdown: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --notification-red: #dc3545;
+            --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* === 2. NAVBAR PRINCIPAL === */
+        .navbar-custom {
+            background: var(--bg-white);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .navbar-scrolled {
+            background: var(--bg-white-solid);
+            box-shadow: var(--shadow-light);
+            padding: 0.5rem 0;
+        }
+        
+        /* === 3. BRAND/LOGO === */
+        .navbar-brand-custom {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+            margin-right: auto;
+            padding-left: 0;  /* Sin padding izquierdo */
+        }
+        
+        .navbar-brand-custom:hover {
+            color: var(--primary-blue) !important;
+        }
+        
+        .navbar-brand-custom i {
+            margin-right: 0.5rem;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+        
+        /* === 4. NAVIGATION LINKS === */
+        .navbar-nav-custom {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav-custom .nav-item {
+            margin: 0 0.25rem;
+        }
+
+        .navbar-nav-custom .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.75rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-nav-custom .nav-link:hover {
+            color: var(--primary-blue) !important;
+            background: var(--hover-blue);
+        }
+        
+        .navbar-nav-custom .nav-link.active {
+            color: var(--primary-blue) !important;
+            background: var(--hover-blue-strong);
+        }
+
+        .navbar-nav-custom .nav-link i {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* === 5. DROPDOWN MENUS === */
+        .dropdown-menu-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dropdown);
+            padding: 1rem 0;
+            margin-top: 0.5rem;
+            background: white;
+        }
+        
+        .dropdown-item-custom {
+            padding: 0.75rem 1.5rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .dropdown-item-custom:hover {
+            background: var(--hover-blue);
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .dropdown-item-custom i {
+            margin-right: 0.75rem;
+            width: 16px;
+            text-align: center;
+        }
+        
+        /* === 6. SEARCH BAR === */
+        .navbar-search {
+            position: relative;
+            margin: 0 1rem;
+        }
+        
+        .navbar-search input {
+            background: var(--bg-light);
+            border: 1px solid #e9ecef;
+            border-radius: 25px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            width: 250px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .navbar-search input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            background: white;
+        }
+        
+        .navbar-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* === 7. ACTION BUTTONS === */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: auto;  /* Empuja los botones a la derecha */
+            padding-right: 0;   /* Sin padding derecho para evitar cortes */
+            flex-shrink: 0;     /* Evita que se compriman */
+        }
+
+        .btn-navbar-secondary {
+            background: transparent;
+            color: var(--primary-blue) !important;
+            border: 2px solid var(--primary-blue);
+            border-radius: 25px;
+            padding: 0.6rem 1.25rem;  /* Padding más ajustado */
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;  /* Texto ligeramente más pequeño */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            min-width: 120px;  /* Ancho mínimo para evitar compresión */
+        }
+        
+        .btn-navbar-secondary:hover {
+            background: var(--primary-blue);
+            color: white !important;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .btn-navbar-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white !important;
+            border: none;
+            border-radius: 25px;
+            padding: 0.7rem 1.5rem;   /* Padding más ajustado */
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;   /* Texto ligeramente más pequeño */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            min-width: 140px;  /* Ancho mínimo para evitar compresión */
+        }
+        
+        .btn-navbar-primary:hover {
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+            color: white !important;
+            text-decoration: none;
+        }
+        
+        /* === 8. NOTIFICATIONS AND USER === */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--notification-red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gradient-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* === 9. MOBILE RESPONSIVE === */
+        /* === 9. MOBILE RESPONSIVE === */
+        @media (max-width: 1200px) {
+            /* Ajustar botones en pantallas medianas */
+            .btn-navbar-secondary {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            
+            .btn-navbar-primary {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            /* Ocultar elementos en mobile */
+            .navbar-search {
+                display: none;
+            }
+            
+            .navbar-nav-custom,
+            .navbar-actions {
+                display: none;
+            }
+            
+            /* Mostrar elementos mobile en collapse */
+            .navbar-collapse .navbar-search {
+                display: block;
+                margin: 1rem 0;
+                width: 100%;
+            }
+            
+            .navbar-collapse .navbar-search input {
+                width: 100%;
+            }
+            
+            .navbar-collapse .btn-navbar-primary,
+            .navbar-collapse .btn-navbar-secondary {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .navbar-collapse .navbar-nav-custom {
+                display: block;
+                text-align: center;
+                margin: 1rem 0;
+            }
+
+            .navbar-collapse .navbar-actions {
+                display: flex;
+                flex-direction: column;
+                margin-top: 1rem;
+                padding-right: 0;
+            }
+            
+            .navbar-brand-custom {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-custom {
+                padding: 0.75rem 0;
+            }
+
+            .navbar-brand-custom {
+                font-size: 1.3rem;
+            }
+
+            .navbar-brand-custom i {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* === 10. NAVBAR SPACER === */
+        .navbar-spacer {
+            height: 80px;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-spacer {
+                height: 70px;
+            }
+        }
+
+        /* === 11. ADDITIONAL IMPROVEMENTS === */
+        .dropdown-divider {
+            margin: 0.5rem 0;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* Smooth hover transitions */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Focus styles for accessibility */
+        .nav-link:focus,
+        .btn-navbar-primary:focus,
+        .btn-navbar-secondary:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+
+/*HOME CSS
+
+.hero-section {
+    position: relative;
+    min-height: 600px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.text-highlight {
+    color: #00D4FF;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+}
+
+/* Search Form */
+.search-container {
+    max-width: 800px;
+}
+
+.search-form {
+    background: white;
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.search-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.search-field {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.search-icon {
+    color: #6c757d;
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    padding: 15px 0;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+.search-button-container {
+    flex-shrink: 0;
+}
+
+.btn-search {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 15px 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+}
+
+/* Hero Side Content */
+.hero-side-content {
+    position: relative;
+    z-index: 2;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Categories Section */
+.categories-section {
+    padding: 3rem 0;
+    background: #f8f9fa;
+}
+
+.categories-grid {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.categories-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.category-tag-primary {
+    background: #e3f2fd;
+    color: #1976d2;
+    border-color: #bbdefb;
+}
+
+.category-tag-primary:hover {
+    background: #bbdefb;
+    color: #0d47a1;
+    transform: translateY(-2px);
+}
+
+.category-tag-secondary {
+    background: #f3e5f5;
+    color: #7b1fa2;
+    border-color: #ce93d8;
+}
+
+.category-tag-secondary:hover {
+    background: #ce93d8;
+    color: #4a148c;
+    transform: translateY(-2px);
+}
+
+/* Action Buttons */
+.action-buttons {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-action-primary {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-action-primary:hover {
+    background: #138496;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-action-secondary {
+    background: transparent;
+    color: #17a2b8;
+    border: 2px solid #17a2b8;
+    border-radius: 25px;
+    padding: 10px 25px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-action-secondary:hover {
+    background: #17a2b8;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Recruitment Section */
+.recruitment-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.recruitment-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.recruitment-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.recruitment-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+/* Process Steps */
+.process-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.step-item {
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    margin: 1rem;
+}
+
+.step-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.step-purple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.step-green {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+}
+
+.step-blue {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.step-content h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.step-content h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.step-connector {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    margin: 0 1rem;
+}
+
+/* Featured Jobs */
+.featured-jobs-section {
+    padding: 4rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.job-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.job-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.logo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #e9ecef;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+.job-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.company-name {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.job-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+}
+
+.job-location {
+    color: #6c757d;
+}
+
+.job-type {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.job-description {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.salary-info {
+    margin-bottom: 1rem;
+}
+
+.salary-amount {
+    font-weight: 600;
+    color: #28a745;
+    font-size: 1.1rem;
+}
+
+.job-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.job-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.btn-job-apply {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-job-apply:hover {
+    background: #0056b3;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .search-inputs {
+        flex-direction: column;
+    }
+    
+    .search-field {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .search-button-container {
+        width: 100%;
+    }
+    
+    .btn-search {
+        width: 100%;
+    }
+    
+    .categories-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .process-steps {
+        flex-direction: column;
+    }
+    
+    .step-connector {
+        width: 2px;
+        height: 50px;
+        transform: rotate(90deg);
+        margin: 1rem 0;
+    }
+    
+    .recruitment-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .category-tag {
+        font-size: 0.8rem;
+        padding: 6px 15px;
+    }
+    
+    .step-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 62, 80, 0.7);
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.text-highlight {
+    color: #ffc107;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.search-form .search-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-input {
+    padding-left: 2rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.search-field {
+    position: relative;
+    flex: 1;
+}
+
+.btn-search {
+    min-width: 150px;
+}
+
+.category-tag {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.category-tag-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.category-tag-primary:hover {
+    background-color: #0056b3;
+}
+
+.process-steps .step-item {
+    max-width: 200px;
+}
+
+.step-circle {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
+
+
+.hero-side-content {
+    margin-top: 20px; /* separa cada tarjeta verticalmente */
+}
+.feature-card h4 {
+    margin-bottom: 10px; /* opcional: ajusta el espacio debajo del título */
+}
